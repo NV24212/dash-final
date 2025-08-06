@@ -228,7 +228,7 @@ export default function Orders() {
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <Button onClick={() => openDialog()} className="bg-dashboard-primary hover:bg-dashboard-primary-light">
-              <Plus className="w-4 h-4 ltr:mr-2 rtl:ml-2" />
+              <Plus className="w-4 h-4 mr-2 rtl:mr-0 rtl:ml-2" />
               {t('orders.addNew')}
             </Button>
           </DialogTrigger>
@@ -347,7 +347,7 @@ export default function Orders() {
                       onClick={addProductToOrder}
                       className="w-full"
                     >
-                      <Plus className="w-4 h-4 ltr:mr-2 rtl:ml-2" />
+                      <Plus className="w-4 h-4 mr-2 rtl:mr-0 rtl:ml-2" />
                       {t('orders.addItem')}
                     </Button>
                   </div>
@@ -523,7 +523,7 @@ export default function Orders() {
                       onClick={() => openViewDialog(order)}
                       className="flex-1"
                     >
-                      <Eye className="w-4 h-4 ltr:mr-1 rtl:ml-1" />
+                      <Eye className="w-4 h-4 mr-1 rtl:mr-0 rtl:ml-1" />
                       {t('orders.view')}
                     </Button>
                     <Button 
@@ -531,7 +531,7 @@ export default function Orders() {
                       variant="outline" 
                       onClick={() => openDialog(order)}
                     >
-                      <Edit className="w-4 h-4 ltr:mr-1 rtl:ml-1" />
+                      <Edit className="w-4 h-4 mr-1 rtl:mr-0 rtl:ml-1" />
                       {t('orders.edit')}
                     </Button>
                     <Button 
@@ -689,7 +689,7 @@ export default function Orders() {
               className="mt-4 bg-dashboard-primary hover:bg-dashboard-primary-light"
               onClick={() => openDialog()}
             >
-              <Plus className="w-4 h-4 ltr:mr-2 rtl:ml-2" />
+              <Plus className="w-4 h-4 mr-2 rtl:mr-0 rtl:ml-2" />
               {t('empty.createOrder')}
             </Button>
           </CardContent>

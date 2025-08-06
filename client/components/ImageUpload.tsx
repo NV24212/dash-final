@@ -152,7 +152,7 @@ export default function ImageUpload({ images, onImagesChange, maxImages = 5 }: I
               disabled={uploading || images.length >= maxImages}
               onClick={handleButtonClick}
             >
-              <Upload className="w-4 h-4 ltr:mr-2 rtl:ml-2" />
+              <Upload className="w-4 h-4 mr-2 rtl:mr-0 rtl:ml-2" />
               {t('products.productImages')}
             </Button>
             <p className="text-xs text-gray-500 mt-2">

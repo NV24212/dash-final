@@ -15,7 +15,7 @@ export default function PlaceholderPage({ title, description, icon: Icon = Const
       <div className="flex items-center gap-4">
         <Link to="/">
           <Button variant="outline" size="sm">
-            <ArrowLeft className="w-4 h-4 ltr:mr-2 rtl:ml-2" />
+            <ArrowLeft className="w-4 h-4 mr-2 rtl:mr-0 rtl:ml-2" />
             Back to Dashboard
           </Button>
         </Link>

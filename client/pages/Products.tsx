@@ -160,11 +160,11 @@ export default function Products() {
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <Button onClick={() => openDialog()} className="bg-dashboard-primary hover:bg-dashboard-primary-light">
-              <Plus className="w-4 h-4 ltr:mr-2 rtl:ml-2" />
+              <Plus className="w-4 h-4 mr-2 rtl:mr-0 rtl:ml-2" />
               {t('products.addNew')}
             </Button>
           </DialogTrigger>
-          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto rtl:text-right">
             <DialogHeader>
               <DialogTitle>
                 {editingProduct ? t('products.editProduct') : t('products.addProduct')}
@@ -184,7 +184,7 @@ export default function Products() {
                 <TabsContent value="details" className="space-y-4">
                   <div className="grid gap-4">
                     <div className="grid gap-2">
-                      <Label htmlFor="name">{t('products.productName')}</Label>
+                      <Label htmlFor="name" className="rtl:text-right">{t('products.productName')}</Label>
                       <Input
                         id="name"
                         value={formData.name}
@@ -194,7 +194,7 @@ export default function Products() {
                       />
                     </div>
                     <div className="grid gap-2">
-                      <Label htmlFor="description">{t('products.productDescription')}</Label>
+                      <Label htmlFor="description" className="rtl:text-right">{t('products.productDescription')}</Label>
                       <Textarea
                         id="description"
                         value={formData.description}
@@ -205,7 +205,7 @@ export default function Products() {
                       />
                     </div>
                     <div className="grid gap-2">
-                    <Label htmlFor="price">{t('products.productPrice')} (BD)</Label>
+                    <Label htmlFor="price" className="rtl:text-right">{t('products.productPrice')} (BD)</Label>
                       <Input
                         id="price"
                         type="number"
@@ -240,7 +240,7 @@ export default function Products() {
                         <p className="text-sm text-gray-600">{t('products.variants')}</p>
                       </div>
                       <Button type="button" onClick={addVariant} size="sm" variant="outline">
-                        <Plus className="w-4 h-4 ltr:mr-2 rtl:ml-2" />
+                        <Plus className="w-4 h-4 mr-2 rtl:mr-0 rtl:ml-2" />
                         {t('products.addVariant')}
                       </Button>
                     </div>
@@ -417,7 +417,7 @@ export default function Products() {
                       className="flex-1"
                       onClick={() => openDialog(product)}
                     >
-                      <Edit className="w-4 h-4 ltr:mr-1 rtl:ml-1" />
+                      <Edit className="w-4 h-4 mr-1 rtl:mr-0 rtl:ml-1" />
                       {t('products.edit')}
                     </Button>
                     <Button 
@@ -448,7 +448,7 @@ export default function Products() {
               className="mt-4 bg-dashboard-primary hover:bg-dashboard-primary-light"
               onClick={() => openDialog()}
             >
-              <Plus className="w-4 h-4 ltr:mr-2 rtl:ml-2" />
+              <Plus className="w-4 h-4 mr-2 rtl:mr-0 rtl:ml-2" />
               {t('empty.addProduct')}
             </Button>
           </CardContent>
