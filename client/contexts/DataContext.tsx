@@ -127,10 +127,21 @@ export function DataProvider({ children }: { children: ReactNode }) {
       });
       
       if (!response.ok) {
-        throw new Error('Upload failed');
+        let errorMessage = 'Upload failed';
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.error || errorMessage;
+        } catch {
+          // If we can't parse JSON, use the status text
+          errorMessage = response.statusText || errorMessage;
+        }
+        throw new Error(errorMessage);
       }
       
       const data = await response.json();
+      if (!data.url) {
+        throw new Error('No URL returned from upload');
+      }
       return data.url;
     } catch (error) {
       console.error('Failed to upload image:', error);

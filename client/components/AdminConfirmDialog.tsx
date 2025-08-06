@@ -65,10 +65,10 @@ export default function AdminConfirmDialog({
               {getIcon()}
             </div>
             <div className="flex-1 space-y-3">
-              <DialogTitle className="text-lg font-semibold text-gray-900 text-left">
+              <DialogTitle className="text-lg font-semibold text-gray-900 ltr:text-left rtl:text-right">
                 {title}
               </DialogTitle>
-              <DialogDescription className="text-sm text-gray-600 text-left leading-relaxed">
+              <DialogDescription className="text-sm text-gray-600 ltr:text-left rtl:text-right leading-relaxed">
                 {message}
               </DialogDescription>
             </div>

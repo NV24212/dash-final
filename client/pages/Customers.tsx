@@ -108,7 +108,7 @@ export default function Customers() {
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <Button onClick={() => openDialog()} className="bg-dashboard-primary hover:bg-dashboard-primary-light">
-              <Plus className="w-4 h-4 mr-2" />
+              <Plus className="w-4 h-4 ltr:mr-2 rtl:ml-2" />
               {t('customers.addNew')}
             </Button>
           </DialogTrigger>
@@ -222,7 +222,7 @@ export default function Customers() {
                   className="flex-1"
                   onClick={() => openDialog(customer)}
                 >
-                  <Edit className="w-4 h-4 mr-1" />
+                  <Edit className="w-4 h-4 ltr:mr-1 rtl:ml-1" />
                   {t('customers.edit')}
                 </Button>
                 <Button 
@@ -243,16 +243,16 @@ export default function Customers() {
         <Card>
           <CardContent className="text-center py-12">
             <Users className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No customers found</h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">{t('empty.noCustomersFound')}</h3>
             <p className="text-gray-600">
-              {searchTerm ? 'Try adjusting your search terms' : 'Start by adding your first customer'}
+              {searchTerm ? t('empty.noCustomersSearch') : t('empty.noCustomersStart')}
             </p>
             <Button 
               className="mt-4 bg-dashboard-primary hover:bg-dashboard-primary-light"
               onClick={() => openDialog()}
             >
-              <Plus className="w-4 h-4 mr-2" />
-              Add Customer
+              <Plus className="w-4 h-4 ltr:mr-2 rtl:ml-2" />
+              {t('empty.addCustomer')}
             </Button>
           </CardContent>
         </Card>

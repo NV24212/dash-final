@@ -42,12 +42,24 @@ const upload = multer({
 export const uploadMiddleware = upload.single('image');
 
 export const handleImageUpload: RequestHandler = (req, res) => {
+  console.log('Upload request received:', {
+    hasFile: !!req.file,
+    file: req.file ? {
+      originalname: req.file.originalname,
+      mimetype: req.file.mimetype,
+      size: req.file.size,
+      filename: req.file.filename
+    } : null
+  });
+
   if (!req.file) {
+    console.error('No file uploaded in request');
     return res.status(400).json({ error: 'No file uploaded' });
   }
 
   // Return the URL to access the uploaded file
   const fileUrl = `/uploads/${req.file.filename}`;
+  console.log('Upload successful, returning URL:', fileUrl);
   res.json({ url: fileUrl });
 };
 

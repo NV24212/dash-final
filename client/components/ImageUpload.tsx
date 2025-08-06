@@ -20,43 +20,7 @@ export default function ImageUpload({ images, onImagesChange, maxImages = 5 }: I
   const { showAlert } = useDialog();
   const { t } = useLanguage();
 
-  const handleDragOver = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setDragActive(true);
-  }, []);
-
-  const handleDragLeave = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setDragActive(false);
-  }, []);
-
-  const handleDrop = useCallback(async (e: React.DragEvent) => {
-    e.preventDefault();
-    setDragActive(false);
-    
-    const files = Array.from(e.dataTransfer.files);
-    const imageFiles = files.filter(file => file.type.startsWith('image/'));
-    
-    if (imageFiles.length === 0) {
-      showAlert({
-        title: t('message.error'),
-        message: t('products.dragImages'),
-        type: 'warning'
-      });
-      return;
-    }
-
-    await handleFiles(imageFiles);
-  }, [showAlert, t]);
-
-  const handleFileInput = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(e.target.files || []);
-    await handleFiles(files);
-    // Reset input
-    e.target.value = '';
-  }, []);
-
-  const handleFiles = async (files: File[]) => {
+  const handleFiles = useCallback(async (files: File[]) => {
     if (images.length + files.length > maxImages) {
       showAlert({
         title: t('message.error'),
@@ -91,7 +55,43 @@ export default function ImageUpload({ images, onImagesChange, maxImages = 5 }: I
     } finally {
       setUploading(false);
     }
-  };
+  }, [images, maxImages, uploadImage, onImagesChange, showAlert, t]);
+
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setDragActive(true);
+  }, []);
+
+  const handleDragLeave = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setDragActive(false);
+  }, []);
+
+  const handleDrop = useCallback(async (e: React.DragEvent) => {
+    e.preventDefault();
+    setDragActive(false);
+    
+    const files = Array.from(e.dataTransfer.files);
+    const imageFiles = files.filter(file => file.type.startsWith('image/'));
+    
+    if (imageFiles.length === 0) {
+      showAlert({
+        title: t('message.error'),
+        message: t('products.dragImages'),
+        type: 'warning'
+      });
+      return;
+    }
+
+    await handleFiles(imageFiles);
+  }, [showAlert, t, handleFiles]);
+
+  const handleFileInput = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    await handleFiles(files);
+    // Reset input
+    e.target.value = '';
+  }, [handleFiles]);
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
@@ -152,7 +152,7 @@ export default function ImageUpload({ images, onImagesChange, maxImages = 5 }: I
               disabled={uploading || images.length >= maxImages}
               onClick={handleButtonClick}
             >
-              <Upload className="w-4 h-4 mr-2" />
+              <Upload className="w-4 h-4 ltr:mr-2 rtl:ml-2" />
               {t('products.productImages')}
             </Button>
             <p className="text-xs text-gray-500 mt-2">

@@ -228,7 +228,7 @@ export default function Orders() {
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <Button onClick={() => openDialog()} className="bg-dashboard-primary hover:bg-dashboard-primary-light">
-              <Plus className="w-4 h-4 mr-2" />
+              <Plus className="w-4 h-4 ltr:mr-2 rtl:ml-2" />
               {t('orders.addNew')}
             </Button>
           </DialogTrigger>
@@ -347,7 +347,7 @@ export default function Orders() {
                       onClick={addProductToOrder}
                       className="w-full"
                     >
-                      <Plus className="w-4 h-4 mr-2" />
+                      <Plus className="w-4 h-4 ltr:mr-2 rtl:ml-2" />
                       {t('orders.addItem')}
                     </Button>
                   </div>
@@ -523,7 +523,7 @@ export default function Orders() {
                       onClick={() => openViewDialog(order)}
                       className="flex-1"
                     >
-                      <Eye className="w-4 h-4 mr-1" />
+                      <Eye className="w-4 h-4 ltr:mr-1 rtl:ml-1" />
                       {t('orders.view')}
                     </Button>
                     <Button 
@@ -531,7 +531,7 @@ export default function Orders() {
                       variant="outline" 
                       onClick={() => openDialog(order)}
                     >
-                      <Edit className="w-4 h-4 mr-1" />
+                      <Edit className="w-4 h-4 ltr:mr-1 rtl:ml-1" />
                       {t('orders.edit')}
                     </Button>
                     <Button 
@@ -681,16 +681,16 @@ export default function Orders() {
         <Card>
           <CardContent className="text-center py-12">
             <ShoppingCart className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No orders found</h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">{t('empty.noOrdersFound')}</h3>
             <p className="text-gray-600">
-              {searchTerm ? 'Try adjusting your search terms' : 'Start by creating your first order'}
+              {searchTerm ? t('empty.noOrdersSearch') : t('empty.noOrdersStart')}
             </p>
             <Button 
               className="mt-4 bg-dashboard-primary hover:bg-dashboard-primary-light"
               onClick={() => openDialog()}
             >
-              <Plus className="w-4 h-4 mr-2" />
-              Create Order
+              <Plus className="w-4 h-4 ltr:mr-2 rtl:ml-2" />
+              {t('empty.createOrder')}
             </Button>
           </CardContent>
         </Card>

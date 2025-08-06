@@ -165,7 +165,7 @@ export default function Dashboard() {
           ) : (
             <div className="text-center py-8">
               <ShoppingBag className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600">No orders yet. Create your first order to see it here!</p>
+              <p className="text-gray-600">{t('empty.noDashboardOrders')}</p>
             </div>
           )}
         </CardContent>

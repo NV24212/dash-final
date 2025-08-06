@@ -27,8 +27,16 @@ export function createServer() {
 
   app.get("/api/demo", handleDemo);
 
-  // Upload routes
-  app.post("/api/upload", uploadMiddleware, handleImageUpload);
+  // Upload routes with error handling
+  app.post("/api/upload", (req, res, next) => {
+    uploadMiddleware(req, res, (err) => {
+      if (err) {
+        console.error('Upload middleware error:', err);
+        return res.status(400).json({ error: err.message || 'Upload failed' });
+      }
+      handleImageUpload(req, res, next);
+    });
+  });
   app.delete("/api/upload/:filename", deleteImage);
 
   // Customer routes

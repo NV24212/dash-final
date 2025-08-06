@@ -160,7 +160,7 @@ export default function Products() {
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <Button onClick={() => openDialog()} className="bg-dashboard-primary hover:bg-dashboard-primary-light">
-              <Plus className="w-4 h-4 mr-2" />
+              <Plus className="w-4 h-4 ltr:mr-2 rtl:ml-2" />
               {t('products.addNew')}
             </Button>
           </DialogTrigger>
@@ -240,7 +240,7 @@ export default function Products() {
                         <p className="text-sm text-gray-600">{t('products.variants')}</p>
                       </div>
                       <Button type="button" onClick={addVariant} size="sm" variant="outline">
-                        <Plus className="w-4 h-4 mr-2" />
+                        <Plus className="w-4 h-4 ltr:mr-2 rtl:ml-2" />
                         {t('products.addVariant')}
                       </Button>
                     </div>
@@ -417,7 +417,7 @@ export default function Products() {
                       className="flex-1"
                       onClick={() => openDialog(product)}
                     >
-                      <Edit className="w-4 h-4 mr-1" />
+                      <Edit className="w-4 h-4 ltr:mr-1 rtl:ml-1" />
                       {t('products.edit')}
                     </Button>
                     <Button 
@@ -440,16 +440,16 @@ export default function Products() {
         <Card>
           <CardContent className="text-center py-12">
             <Package className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No products found</h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">{t('empty.noProductsFound')}</h3>
             <p className="text-gray-600">
-              {searchTerm ? 'Try adjusting your search terms' : 'Start by adding your first product'}
+              {searchTerm ? t('empty.noProductsSearch') : t('empty.noProductsStart')}
             </p>
             <Button 
               className="mt-4 bg-dashboard-primary hover:bg-dashboard-primary-light"
               onClick={() => openDialog()}
             >
-              <Plus className="w-4 h-4 mr-2" />
-              Add Product
+              <Plus className="w-4 h-4 ltr:mr-2 rtl:ml-2" />
+              {t('empty.addProduct')}
             </Button>
           </CardContent>
         </Card>
