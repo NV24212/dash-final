@@ -68,13 +68,24 @@ export default function ImageUpload({ images, onImagesChange, maxImages = 5 }: I
 
     setUploading(true);
     try {
-      const uploadPromises = files.map(file => uploadImage(file));
-      const uploadedUrls = await Promise.all(uploadPromises);
+      console.log('Uploading files:', files);
+      const uploadedUrls: string[] = [];
+      
+      // Upload files one by one since backend expects single file uploads
+      for (const file of files) {
+        console.log('Uploading file:', file.name, file.type, file.size);
+        const url = await uploadImage(file);
+        uploadedUrls.push(url);
+        console.log('File uploaded successfully:', url);
+      }
+      
+      console.log('All uploads successful, URLs:', uploadedUrls);
       onImagesChange([...images, ...uploadedUrls]);
     } catch (error) {
+      console.error('Upload error:', error);
       showAlert({
         title: t('message.error'),
-        message: t('message.error'),
+        message: error instanceof Error ? error.message : 'Upload failed',
         type: 'error'
       });
     } finally {
