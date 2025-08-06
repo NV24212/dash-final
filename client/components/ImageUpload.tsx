@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useData } from '@/contexts/DataContext';
@@ -15,6 +15,7 @@ interface ImageUploadProps {
 export default function ImageUpload({ images, onImagesChange, maxImages = 5 }: ImageUploadProps) {
   const [dragActive, setDragActive] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const { uploadImage } = useData();
   const { showAlert } = useDialog();
   const { t } = useLanguage();
@@ -46,14 +47,14 @@ export default function ImageUpload({ images, onImagesChange, maxImages = 5 }: I
     }
 
     await handleFiles(imageFiles);
-  }, [images, maxImages, onImagesChange, uploadImage]);
+  }, [showAlert, t]);
 
   const handleFileInput = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
     await handleFiles(files);
     // Reset input
     e.target.value = '';
-  }, [images, maxImages, onImagesChange, uploadImage]);
+  }, []);
 
   const handleFiles = async (files: File[]) => {
     if (images.length + files.length > maxImages) {
@@ -79,6 +80,10 @@ export default function ImageUpload({ images, onImagesChange, maxImages = 5 }: I
     } finally {
       setUploading(false);
     }
+  };
+
+  const handleButtonClick = () => {
+    fileInputRef.current?.click();
   };
 
   const removeImage = (index: number) => {
@@ -122,25 +127,23 @@ export default function ImageUpload({ images, onImagesChange, maxImages = 5 }: I
               {t('products.dragImages')}
             </p>
             <input
+              ref={fileInputRef}
               type="file"
               accept="image/*"
               multiple
               onChange={handleFileInput}
               className="hidden"
-              id="image-upload"
               disabled={uploading || images.length >= maxImages}
             />
-            <label htmlFor="image-upload">
-              <Button
-                type="button"
-                variant="outline"
-                disabled={uploading || images.length >= maxImages}
-                className="cursor-pointer"
-              >
-                <Upload className="w-4 h-4 mr-2" />
-                {t('products.productImages')}
-              </Button>
-            </label>
+            <Button
+              type="button"
+              variant="outline"
+              disabled={uploading || images.length >= maxImages}
+              onClick={handleButtonClick}
+            >
+              <Upload className="w-4 h-4 mr-2" />
+              {t('products.productImages')}
+            </Button>
             <p className="text-xs text-gray-500 mt-2">
               {images.length}/{maxImages} {t('products.productImages')} • {t('products.maxImages')}
             </p>
